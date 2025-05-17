@@ -14,23 +14,23 @@ type CrawTask struct {
 	ID  int
 }
 
-// crawPool 工作池实体
-type crawPool struct {
+// CrawPool 工作池实体
+type CrawPool struct {
 	taskQueue chan CrawTask  // 只要声明是个通道就好了之后new的时候进行初始化
 	workCount int            // 工作者个数
 	wg        sync.WaitGroup // WaitGroup
 }
 
 // NewWorkerPool 初始化工作池
-func NewWorkerPool(workCount int, queueSize int) *crawPool {
-	return &crawPool{
+func NewWorkerPool(workCount int, queueSize int) *CrawPool {
+	return &CrawPool{
 		workCount: workCount,                      // 初始化对应数目的工人
 		taskQueue: make(chan CrawTask, queueSize), // 初始化对应数目的chan用于维护数据
 	}
 }
 
 // Start 启动工作池
-func (c *crawPool) Start() {
+func (c *CrawPool) Start() {
 	// 根据初始化的信息创建指定改数量的工作协程
 	for i := 1; i <= c.workCount; i++ {
 		// Add
@@ -51,7 +51,7 @@ func (c *crawPool) Start() {
 }
 
 // AddTask 向工作池中添加任务
-func (c *crawPool) AddTask(task CrawTask) {
+func (c *CrawPool) AddTask(task CrawTask) {
 	// 向当前工作池的任务队列添加任务
 	c.taskQueue <- task
 }
@@ -83,7 +83,7 @@ func processURL(task CrawTask, workerID int) {
 }
 
 // Stop 等待所有任务完毕关闭工作池
-func (c *crawPool) Stop() {
+func (c *CrawPool) Stop() {
 	// 关闭通道开始任务
 	close(c.taskQueue)
 	// 等待任务全部结束
