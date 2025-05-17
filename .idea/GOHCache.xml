@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GoORMHelperCache">
+    <option name="schemaMapping">
+      <map>
+        <entry key="CrawPool">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/pools/CrawTask.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="crawTask">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/pools/CrawTask.go" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="scannedPathMapping">
+      <map>
+        <entry key="file://$PROJECT_DIR$/cmd/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1747451775229" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/pools/CrawTask.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1747451771516" />
+              <option name="schema">
+                <list>
+                  <option value="crawTask" />
+                  <option value="CrawPool" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="tableStructMapping">
+      <map>
+        <entry key="craw_pool" value="CrawPool" />
+        <entry key="craw_task" value="crawTask" />
+      </map>
+    </option>
+    <option name="lastTimeChecked" value="1747447969679" />
+  </component>
+</project>
