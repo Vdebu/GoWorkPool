@@ -77,7 +77,7 @@ func processURL(task CrawTask, workerID int) {
 	// 输出内容
 	fmt.Printf("任务 #%d 完成: %s, 状态码: %d, 内容长度: %d 字节\n",
 		task.ID, task.URL, resp.StatusCode, len(body))
-	fmt.Println(string(body))
+	//fmt.Println(string(body))
 	// 模拟处理内容耗时
 	time.Sleep(time.Second)
 }
