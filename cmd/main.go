@@ -61,7 +61,7 @@ func initImageProcessPool() {
 		}
 		// 将任务加入队列
 		pool.AddTask(task)
-		// 模拟不规则的任务到达
+		// 模拟不规律的任务到达
 		time.Sleep(time.Duration(rand.Intn(800)) * time.Millisecond)
 	}
 	fmt.Println("等待所有任务完成...")
@@ -70,6 +70,52 @@ func initImageProcessPool() {
 	pool.Stop()
 	// 等待最后的结果打印
 	time.Sleep(500 * time.Millisecond)
+}
+
+// 日志分析
+func initLogAnalyzerPool() {
+	// 创建日志分析工作池，使用4个工作协程
+	analyzer := pools.NewLogAnalyzerPool(4)
+	analyzer.Start()
+
+	// 模拟添加日志文件分析任务
+	logFiles := []pools.LogAnalysisTask{
+		{
+			FilePath:    "/var/log/app/api-service.log",
+			ServiceName: "api-service",
+		},
+		{
+			FilePath:    "/var/log/app/user-service.log",
+			ServiceName: "user-service",
+		},
+		{
+			FilePath:    "/var/log/app/payment-service.log",
+			ServiceName: "payment-service",
+		},
+		{
+			FilePath:    "/var/log/app/notification-service.log",
+			ServiceName: "notification-service",
+		},
+		{
+			FilePath:    "/var/log/app/auth-service.log",
+			ServiceName: "auth-service",
+		},
+	}
+	// 添加分析任务
+	for _, task := range logFiles {
+		analyzer.AddTask(task)
+	}
+
+	// 任务添加完毕等待分析完成
+	fmt.Println("等待日志分析完成...")
+	time.Sleep(2 * time.Second)
+
+	// 停止工作池
+	analyzer.Stop()
+
+	// 生成并输出报告
+	report := analyzer.GenerateReport()
+	fmt.Println(report)
 }
 func main() {
 	fmt.Println("work start...")
